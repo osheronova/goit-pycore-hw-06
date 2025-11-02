@@ -1,13 +1,15 @@
 from collections import UserDict
 
-class PhoneValidationError(ValueError): pass  # custom error
+class PhoneValidationError(ValueError): 
+    pass  # custom error
 
 # base field
 class Field:
     def __init__(self, value): self.value = value
     def __str__(self): return str(self.value)
 
-class Name(Field): pass
+class Name(Field): 
+    pass
 
 # phone: must be 10 digits
 class Phone(Field):
@@ -35,18 +37,20 @@ class Record:
     def edit_phone(self, old: str, new: str) -> bool:
         p = self.find_phone(old)
         if p:
-            p.value = Phone(new).value  # validate then assign
-            return True
-        return False
+            p.value = Phone(new).value
+        return bool(p)
 
     def __str__(self):
         return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
 
 # address book
 class AddressBook(UserDict):
-    def add_record(self, record: Record): self.data[record.name.value] = record
-    def find(self, name: str): return self.data.get(name)
-    def delete(self, name: str) -> bool: return self.data.pop(name, None) is not None
+    def add_record(self, record: Record): 
+        self.data[record.name.value] = record
+    def find(self, name: str): 
+        return self.data.get(name)
+    def delete(self, name: str) -> bool: 
+        return self.data.pop(name, None) is not None
 
 
 # Demo test
